@@ -97,6 +97,8 @@ h2{font-size:18px;font-weight:700;margin:24px 0 14px;letter-spacing:-.02em}
 .cost input:hover,.cost input:focus{background:transparent}
 .cost span{color:var(--sub);font-size:13px}
 .times{color:var(--sub)}
+.po{flex:1;width:auto;min-width:130px;font-size:14px;background:var(--hover);border-radius:8px;padding:6px 10px}
+.po:hover,.po:focus{background:var(--line)}
 .th{position:relative;width:128px;align-self:stretch;min-height:128px;flex-shrink:0;border-radius:0;background:var(--hover);border-left:1px solid var(--line);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;font-size:26px;text-align:center;padding:8px}
 .th .cap{font-size:11px;color:var(--sub);line-height:1.35;word-break:keep-all}
 .th .cap[hidden],.th .ph[hidden]{display:none}
@@ -422,7 +424,7 @@ function buildItem(it,list,idx){
     +'<div class="pc"><input class="pn" placeholder="사고 싶은 것">'
     +'<div class="pm"><div class="cost"><input class="pp" type="number" placeholder="가격"><span>원</span></div>'
     +'<span class="times">×</span><div class="cost q"><input class="pq" type="number" min="1" placeholder="1"><span>개</span></div>'
-    +'<span class="sub"></span></div><div class="lk"></div><div class="nb"></div></div>'
+    +'<input class="po" placeholder="옵션 (색상·사이즈 등)" spellcheck="false"><span class="sub"></span></div><div class="lk"></div><div class="nb"></div></div>'
     +'<div class="th" title="눌러서 이미지 올리기 · 마우스를 올리고 붙여넣기(Ctrl+V)도 돼요"><span class="ph">🖼️</span><span class="cap"></span><img alt="" hidden><span class="rm" title="이미지 지우기">✕</span><input class="afile" type="file" accept="image/*"></div>'
     +'<span class="x" title="삭제">✕</span>';
   var ck=r.querySelector('.ck input'),pn=r.querySelector('.pn'),pp=r.querySelector('.pp'),pq=r.querySelector('.pq'),sub=r.querySelector('.sub');
@@ -432,6 +434,7 @@ function buildItem(it,list,idx){
   pn.oninput=function(){it.name=pn.value;save()};
   pp.oninput=function(){it.price=pp.value;paintSub();save();totals()};
   pq.oninput=function(){it.qty=pq.value;paintSub();save();totals()};
+  var po=r.querySelector('.po');po.value=it.opt||'';po.oninput=function(){it.opt=po.value;save()};
   ck.onchange=function(){it.done=ck.checked;r.classList.toggle('done',it.done);save();if(D.hideDone)render();else totals()};
   r.querySelector('.nb').appendChild(noteBox('note','링크, 옵션(색상·사이즈), 메모',it,'memo'));
   /* 링크 전용 칸: 긴 주소는 숨기고 짧은 버튼으로 보여줘요 */
