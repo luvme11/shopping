@@ -18,7 +18,7 @@ textarea{resize:none;overflow:hidden;line-height:1.6}
 .app{display:flex;min-height:100vh}
 .main{flex:1;min-width:0}
 .cover{height:190px;background:var(--cover)}
-.page{max-width:780px;margin:0 auto;padding:0 24px 80px}
+.page{max-width:1400px;margin:0 auto;padding:0 24px 80px}
 .icon{width:84px;height:84px;margin-top:-48px;display:flex;align-items:center;justify-content:center;border-radius:24px;overflow:hidden;font-size:62px;line-height:1;position:relative}
 .icon img{width:100%;height:100%;object-fit:cover;display:block}
 .icon.has{border:3px solid var(--bg);background:var(--bg);box-shadow:0 4px 14px rgba(0,0,0,.12)}
@@ -79,27 +79,35 @@ h2{font-size:18px;font-weight:700;margin:24px 0 14px;letter-spacing:-.02em}
 .mh:hover .x{opacity:1}
 .mh .x:hover{background:var(--hover)}
 @media(hover:none){.mh .x{opacity:1}}
-.mb{margin:2px 0 6px}
+.mb{margin:2px 0 6px;display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:12px;align-items:start}
+.mb .add{grid-column:1/-1;justify-self:start;margin:2px 0}
+@media(min-width:761px) and (max-width:1230px){body:not(.side-closed) .mb{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(min-width:761px) and (max-width:1050px){body:not(.side-closed) .mb{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:980px){.mb{grid-template-columns:repeat(4,minmax(0,1fr))}}
+@media(max-width:760px){.mb{grid-template-columns:repeat(3,minmax(0,1fr))}}
+@media(max-width:600px){.mb{grid-template-columns:repeat(2,minmax(0,1fr))}}
 .empty{color:var(--sub);padding:6px 4px}
 
 /* 상품 카드 */
-.pi{position:relative;display:flex;gap:10px;align-items:stretch;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:0;margin:8px 0;overflow:hidden}
+.pi{position:relative;display:flex;flex-direction:column;background:var(--bg);border:1px solid var(--line);border-radius:14px;padding:0;margin:0;overflow:hidden}
 .pi.done .pn{text-decoration:line-through;color:var(--sub)}
 .pi.done{opacity:.7}
-.ck{padding:17px 0 0 12px;flex-shrink:0}
+.ck{position:absolute;top:8px;left:8px;z-index:3;display:flex;padding:5px;background:rgba(255,255,255,.88);border-radius:8px;box-shadow:0 1px 4px rgba(0,0,0,.15)}
 .ck input{width:20px;height:20px;padding:0;margin:0;accent-color:var(--acc);cursor:pointer}
-.pc{flex:1;min-width:0;padding:10px 0}
-.pn{font-size:16px;font-weight:600;padding:4px 6px}
+.pc{min-width:0;padding:10px 12px 12px}
+.pn{font-size:16px;font-weight:600;line-height:1.35;min-height:32px;padding:4px 6px}
 .pm{display:flex;align-items:center;gap:8px;flex-wrap:wrap;margin:4px 0 2px 2px}
 .cost{display:flex;align-items:center;background:var(--hover);border-radius:8px;padding:0 10px 0 4px}
 .cost input{width:100px;text-align:right;font-size:14px;padding:4px}
-.cost.q input{width:52px}
+.cost.q input{width:44px}
+.pm .cost:first-child{flex:1;min-width:0}
+.pm .cost:first-child input{width:100%;min-width:0}
 .cost input:hover,.cost input:focus{background:transparent}
 .cost span{color:var(--sub);font-size:13px}
 .times{color:var(--sub)}
-.po{flex:1;width:auto;min-width:130px;font-size:14px;background:var(--hover);border-radius:8px;padding:6px 10px}
+.po{flex:1 1 100%;width:auto;min-width:0;min-height:34px;font-size:14px;line-height:1.5;background:var(--hover);border-radius:8px;padding:6px 10px}
 .po:hover,.po:focus{background:var(--line)}
-.th{position:relative;width:128px;align-self:stretch;min-height:128px;flex-shrink:0;border-radius:0;background:var(--hover);border-left:1px solid var(--line);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;font-size:26px;text-align:center;padding:8px}
+.th{position:relative;width:100%;aspect-ratio:1/1;order:-1;flex-shrink:0;border-radius:0;background:var(--hover);border-bottom:1px solid var(--line);overflow:hidden;cursor:pointer;display:flex;flex-direction:column;gap:6px;align-items:center;justify-content:center;font-size:26px;text-align:center;padding:8px}
 .th .cap{font-size:11px;color:var(--sub);line-height:1.35;word-break:keep-all}
 .th .cap[hidden],.th .ph[hidden]{display:none}
 .th img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
@@ -108,9 +116,9 @@ h2{font-size:18px;font-weight:700;margin:24px 0 14px;letter-spacing:-.02em}
 .th .rm{position:absolute;bottom:6px;right:6px;z-index:2;background:rgba(0,0,0,.55);color:#fff;font-size:11px;border-radius:999px;width:20px;height:20px;display:none;align-items:center;justify-content:center}
 .th.has:hover .rm{display:flex}
 @media(hover:none){.th.has .rm{display:flex}}
-@media(max-width:520px){.th{width:96px;min-height:96px;font-size:20px}}
-.tr{display:flex;align-items:center;gap:8px}
-.tr .pn{flex:1;min-width:0}
+@media(max-width:480px){.mb{grid-template-columns:1fr}.th{aspect-ratio:4/3}}
+.tr{display:flex;align-items:center;flex-wrap:wrap;gap:2px 8px}
+.tr .pn{flex:1 1 90px;min-width:0}
 .sub{font-weight:700;font-size:14px;white-space:nowrap;padding-right:8px}
 .pi .x{position:absolute;top:8px;right:8px;z-index:3;cursor:pointer;color:#fff;background:rgba(0,0,0,.45);width:22px;height:22px;display:flex;align-items:center;justify-content:center;font-size:12px;border-radius:999px;opacity:0;user-select:none}
 .pi:hover .x{opacity:1}
@@ -423,20 +431,21 @@ document.addEventListener('paste',function(e){
 function buildItem(it,list,idx){
   var r=document.createElement('div');r.className='pi'+(it.done?' done':'');
   r.innerHTML='<label class="ck"><input type="checkbox" title="샀어요"></label>'
-    +'<div class="pc"><div class="tr"><input class="pn" placeholder="사고 싶은 것"><span class="sub"></span></div>'
+    +'<div class="pc"><div class="tr"><textarea class="pn" rows="1" placeholder="사고 싶은 것"></textarea><span class="sub"></span></div>'
     +'<div class="pm"><div class="cost"><input class="pp" type="number" placeholder="가격"><span>원</span></div>'
     +'<span class="times">×</span><div class="cost q"><input class="pq" type="number" min="1" placeholder="1"><span>개</span></div>'
-    +'<input class="po" placeholder="옵션 (색상·사이즈 등)" spellcheck="false"></div><div class="lk"></div></div>'
+    +'<textarea class="po" rows="1" placeholder="옵션 (색상·사이즈 등)" spellcheck="false"></textarea></div><div class="lk"></div></div>'
     +'<div class="th" title="눌러서 이미지 올리기 · 마우스를 올리고 붙여넣기(Ctrl+V)도 돼요"><span class="ph">🖼️</span><span class="cap"></span><img alt="" hidden><span class="rm" title="이미지 지우기">✕</span><input class="afile" type="file" accept="image/*"></div>'
     +'<span class="x" title="삭제">✕</span>';
   var ck=r.querySelector('.ck input'),pn=r.querySelector('.pn'),pp=r.querySelector('.pp'),pq=r.querySelector('.pq'),sub=r.querySelector('.sub');
   ck.checked=!!it.done;pn.value=it.name||'';pp.value=it.price||'';pq.value=it.qty||'';
   function paintSub(){sub.textContent=Number(it.price||0)?won(itTotal(it)):''}
   paintSub();
-  pn.oninput=function(){it.name=pn.value;save()};
+  pn.oninput=function(){it.name=pn.value;save();fit(pn)};
+  pn.onkeydown=function(e){if(e.key==='Enter')e.preventDefault()};
   pp.oninput=function(){it.price=pp.value;paintSub();save();totals()};
   pq.oninput=function(){it.qty=pq.value;paintSub();save();totals()};
-  var po=r.querySelector('.po');po.value=it.opt||'';po.oninput=function(){it.opt=po.value;save()};
+  var po=r.querySelector('.po');po.value=it.opt||'';po.oninput=function(){it.opt=po.value;save();fit(po)};
   ck.onchange=function(){it.done=ck.checked;r.classList.toggle('done',it.done);save();if(D.hideDone)render();else totals()};
   /* 링크 전용 칸: 긴 주소는 숨기고 짧은 버튼으로 보여줘요 */
   (function(){
@@ -525,7 +534,7 @@ function render(){
     box.appendChild(el);
   });
   totals();
-  document.querySelectorAll('textarea.note').forEach(fit);
+  document.querySelectorAll('textarea.po,textarea.pn').forEach(fit);
 }
 $('addMall').onclick=function(){addMall('')};
 (function(){var p=$('presets');PRESETS_MALL.forEach(function(n){var c=document.createElement('span');c.className='chip';c.textContent='+ '+n;c.onclick=function(){addMall(n)};p.appendChild(c)})})();
@@ -563,6 +572,7 @@ $('sideOpen').onclick=function(){setSide(true)};
 $('scrim').onclick=function(){setSide(false)};
 if(isMobile()||ls('sl-side')==='closed')document.body.classList.add('side-closed');
 
+window.addEventListener('resize',function(){document.querySelectorAll('textarea.po,textarea.pn').forEach(fit)});
 function applyAll(){
   var l=L();
   renderSide();
